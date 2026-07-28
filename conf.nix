@@ -1,0 +1,45 @@
+{ config, lib, pkgs, ... }:
+
+{
+	imports = 
+	[
+		./modules/grub.nix
+		./modules/desktop.nix
+		./modules/git.nix
+		./modules/gnupg.nix
+		./modules/home/user.nix
+		./modules/home-manager.nix
+		./modules/services/openssh.nix
+	];
+
+	# Every config that i dont know where to fit it into, goes here
+
+	# latest kernel
+	boot.kernelPackages = pkgs.linuxPackages_latest;
+	
+	# bluetooth
+	hardware.bluetooth.enable = true;
+
+	# network
+	networking.hostName = "nixos";
+	networking.networkmanager.enable = true;
+
+	# time & locale
+	time.timeZone = "America/Sao_Paulo";
+	i18n.defaultLocale = "en_US.UTF-8";
+	console = {
+		font = "Lat2-Terminus16";
+		useXkbConfig = true;
+	};
+
+	# pipewire
+	services.pipewire = {
+		enable = true;
+		pulse.enable = true;
+	};
+
+	# touchpad
+	services.libinput.enable = true;
+
+	system.stateVersion = "26.05";
+}

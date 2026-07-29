@@ -5,20 +5,20 @@
 		enable = true;
 		settings = {
 			general = {
-				["ergonomic.toml"];
+				import = ["ergonomic.toml"];
 				live_config_reload = true;
 			};
 			font = {
 				normal = {
-					family = "JetBrainsMono Nerd Font";
+					family = "JetBrains Mono Nerd Font";
 					style = "Regular";
 				};
 				bold = {
-					family = "JetBrainsMono Nerd Font";
+					family = "JetBrains Mono Nerd Font";
 					style = "Bold";
 				};
 				italic = {
-						family = "JetBrainsMono Nerd Font";
+						family = "JetBrains Mono Nerd Font";
 						style = "Italic";
 				};
 				size = 8;

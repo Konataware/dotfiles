@@ -7,9 +7,11 @@
 		./modules/desktop.nix
 		./modules/git.nix
 		./modules/gnupg.nix
-		./modules/home/user.nix
 		./modules/home-manager.nix
 		./modules/services/openssh.nix
+		./modules/pkgs/system.nix
+		./modules/pkgs/fonts.nix
+		./modules/home/user.nix
 	];
 
 	# Every config that i dont know where to fit it into, goes here

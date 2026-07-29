@@ -5,7 +5,7 @@
 		enable = true;
 		config = {
 				user.name = "Konataware";
-				user.email = "luansilie404@gmail.com";
+				user.email = "luansiloe404@gmail.com";
 		};
 	};
 }

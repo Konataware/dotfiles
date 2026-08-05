@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
+	services.displayManager.defaultSession = "none+i3";
 	services.xserver = {
 		enable = true;
 
@@ -12,11 +13,13 @@
 		windowManager.i3.enable = true;
 		
 		displayManager = {
-			defaultSession = "none+i3";
-			lightdm.greeters.gtk.extraConfig = "
-				background=#000000
-				user-background = false
-			";
+			lightdm.enable = false;
+			startx.enable = true;
 		};
+		
+		# xterm is shit
+		excludePackages = with pkgs; [
+			xterm
+		];
 	};
 }

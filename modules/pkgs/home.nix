@@ -27,6 +27,7 @@
 		bash-language-server
 		gcc
 		gnumake
+		lazygit
 		shellcheck
 		tree-sitter
 

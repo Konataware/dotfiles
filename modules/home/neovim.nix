@@ -6,7 +6,7 @@
 		defaultEditor = true;
 		viAlias = true;
 		vimAlias = true;
-		extraLuaConfig = ''
+		initLua = ''
 			-- --------------------------------------------
 			-- Bootstrap Lazy.nvim (the plugin manager)
 			-- --------------------------------------------
@@ -31,8 +31,8 @@
 					-- This imports the entire LazyVim distribution
 					{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 					{ "bluz71/vim-moonfly-colors" },
-					-- { "ember-theme/nvim" },
-					-- { "julien/vim-colors-green" },
+					{ "ember-theme/nvim" },
+					{ "julien/vim-colors-green" },
 					{ "LazyVim/LazyVim", opts = { colorscheme = "moonfly" }, },
 
 					-- OPTIONAL: Import extra language/feature modules

@@ -14,8 +14,6 @@
 		./modules/home/user.nix
 	];
 
-	# Every config that i dont know where to fit it into, goes here
-
 	# latest kernel
 	boot.kernelPackages = pkgs.linuxPackages_latest;
 	

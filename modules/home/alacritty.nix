@@ -5,7 +5,7 @@
 		enable = true;
 		settings = {
 			general = {
-				import = ["ergonomic.toml"];
+				import = ["colors.toml"];
 				live_config_reload = true;
 			};
 			font = {

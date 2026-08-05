@@ -8,6 +8,22 @@
 			EDITOR = "nvim";
 			VISUAL = "nvim";
 		};
+
+		home.file.".xinitrc" = {
+			text = ''
+				#!/bin/sh
+				if [-f /etc/profile ]; then
+					./etc/profile
+				fi
+
+				if [-f ~/.profile ]; then
+					.~/.profile
+				fi
+
+				exec i3
+			'';
+			executable = true;
+		};
 		
 		# user pkgs and program configs
 		imports = [ 

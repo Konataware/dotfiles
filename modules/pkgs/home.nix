@@ -7,6 +7,7 @@
 		arandr
 		dunst
 		flameshot
+		libreoffice-still
 		lxappearance
 		pavucontrol
 		rofi
@@ -15,12 +16,14 @@
 		bluetui
 		fastfetch
 		fd
+		grim
 		htop
 		keepassxc
+		slurp
 		tldr
 		tree
 		wallust
-		xclip
+		wl-clipboard
 		yazi
 
 		# Development / programming tools

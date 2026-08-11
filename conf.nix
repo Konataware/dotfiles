@@ -32,10 +32,13 @@
 		useXkbConfig = true;
 	};
 
+	security.polkit.enable = true;	
+
 	# pipewire
 	services.pipewire = {
 		enable = true;
 		pulse.enable = true;
+		alsa.enable = true;
 	};
 
 	# touchpad

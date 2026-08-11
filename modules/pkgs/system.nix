@@ -5,13 +5,11 @@
 	"steam"
 	"steam-unwrapped"
 	];
+
 	environment.systemPackages = with pkgs; [
-		i3
-		i3blocks
 		ntfs3g
 		git
 		wget
-		xinit
 		heroic
 		wineWow64Packages.stable
 
@@ -25,7 +23,6 @@
 		pkgsi686Linux.gst_all_1.gst-plugins-base
 		pkgsi686Linux.gst_all_1.gst-plugins-good
 		
-		# might switch to user, need to research.
 		gamescope
 		mangohud
 	];

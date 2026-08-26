@@ -12,7 +12,7 @@
 				efiSupport = true;
 				device = "nodev";
 				enable = true;
-				useOSProber = true;
+				useOSProber = false;
 				efiInstallAsRemovable = true;
 
 				extraEntries = ''

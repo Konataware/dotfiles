@@ -22,12 +22,13 @@
         { command = "dunst"; always = true; }
         { command = "dex --autostart --environment i3"; }
         { command = "xss-lock --transfer-sleep-lock -- i3lock --nofork"; always = true; }
+		  { command = "swaymsg workspace 1"; always = true; }
       ];
 
       keybindings = {
         # Volume
-        "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +10%";
-        "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -10%";
+        "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
+        "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
 
         # Terminal
@@ -41,6 +42,7 @@
 
         # Launcher
         "Mod4+Control+Return" = "exec rofi -show drun";
+		  "Mod4+Control+m" = "exec rofi -show window";
 
         # Focus
         "Mod4+j" = "focus left";
@@ -86,7 +88,7 @@
         "Mod4+Shift+r" = "restart";
         "Mod4+Shift+e" = "exec swaymsg exit";
 
-        # Enter resize mode (this is the only binding needed here)
+        # Enter resize mode
         "Mod4+r" = "mode resize";
 
         # Workspaces
@@ -113,7 +115,6 @@
         "Mod4+Shift+0" = "move container to workspace 10";
       };
 
-      # ---- Define the resize mode here ----
       modes = {
         resize = {
           "j" = "resize shrink width 10 px or 10 ppt";
@@ -133,7 +134,6 @@
       };
     };
 
-    # extraConfig now only holds settings that don't fit the Nix structure
     extraConfig = ''
       font pango:JetBrains Mono 8
 

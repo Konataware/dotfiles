@@ -12,6 +12,7 @@
 		./modules/pkgs/system.nix
 		./modules/pkgs/fonts.nix
 		./modules/home/user.nix
+		#./modules/services/apache.nix
 	];
 
 	# latest kernel

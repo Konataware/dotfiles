@@ -1,9 +1,16 @@
 { config, lib, pkgs, ... }:
 
 {
+
+	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+		"anytype"
+		"anytype-heart"
+	];
+
 	home.packages = with pkgs; [
 		# Desktop / GUI applications
 		alacritty
+		#anytype
 		arandr
 		dunst
 		flameshot

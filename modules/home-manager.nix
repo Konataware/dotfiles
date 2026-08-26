@@ -15,6 +15,7 @@
 			./home/alacritty.nix
 			./home/bash.nix
 			./home/neovim.nix
+			./home/flameshot.nix
 			./home/sway.nix
 		];
 	};

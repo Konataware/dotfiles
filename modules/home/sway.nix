@@ -1,5 +1,3 @@
-{ config, lib, pkgs, ... }:
-
 {
   wayland.windowManager.sway = {
     enable = true;
@@ -9,20 +7,29 @@
       terminal = "alacritty";
       menu = "rofi";
       bars = [ ];
-		
-	input = {
-		"type:keyboard" = {
-			xkb_layout = "br";
-			xkb_variant = "abnt2";
-			xkb_model = "abnt2";
-		};
-	};
+
+      input = {
+        "type:keyboard" = {
+          xkb_layout = "br";
+          xkb_variant = "abnt2";
+          xkb_model = "abnt2";
+        };
+      };
 
       startup = [
-        { command = "dunst"; always = true; }
+        {
+          command = "dunst";
+          always = true;
+        }
         { command = "dex --autostart --environment i3"; }
-        { command = "xss-lock --transfer-sleep-lock -- i3lock --nofork"; always = true; }
-		  { command = "swaymsg workspace 1"; always = true; }
+        {
+          command = "xss-lock --transfer-sleep-lock -- i3lock --nofork";
+          always = true;
+        }
+        {
+          command = "swaymsg workspace 1";
+          always = true;
+        }
       ];
 
       keybindings = {
@@ -42,7 +49,7 @@
 
         # Launcher
         "Mod4+Control+Return" = "exec rofi -show drun";
-		  "Mod4+Control+m" = "exec rofi -show window";
+        "Mod4+Control+m" = "exec rofi -show window";
 
         # Focus
         "Mod4+j" = "focus left";

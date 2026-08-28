@@ -1,9 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
-	users.users.paz = {
-		isNormalUser = true;
-		extraGroups = [ "wheel" "networkmanager" ];
-	};
+  users.users.paz = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
+  };
 }
-

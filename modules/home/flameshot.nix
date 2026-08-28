@@ -1,5 +1,3 @@
-{ config, lib, pkgs, ... }:
-
 {
   services.flameshot = {
     enable = true;
@@ -7,8 +5,8 @@
       General = {
         useGrimAdapter = true;
         disabledGrimWarning = true;
-		  showStartupLaunchMessage = false;
-		  showDesktopNotification = true;
+        showStartupLaunchMessage = false;
+        showDesktopNotification = true;
       };
     };
   };

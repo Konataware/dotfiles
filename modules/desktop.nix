@@ -1,9 +1,7 @@
-{ config, lib, pkgs, ... }:
-
 {
-	services.xserver.enable = false;
-	programs.sway.enable = true;
+  services.xserver.enable = false;
+  programs.sway.enable = true;
 
-	hardware.graphics.enable = true;
-	environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  hardware.graphics.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

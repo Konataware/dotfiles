@@ -1,17 +1,17 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-unwrapped"
-    ];
+  nixpkgs.config.allowUnfreePackages = [
+    "steam"
+    "steam-unwrapped"
+    "steamcmd"
+  ];
 
   environment.systemPackages = with pkgs; [
     ntfs3g
     git
     wget
+    steamcmd
     heroic
     wineWow64Packages.stable
 

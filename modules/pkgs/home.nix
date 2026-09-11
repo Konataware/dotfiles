@@ -1,7 +1,6 @@
 { lib, pkgs, ... }:
 
 {
-
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
@@ -31,6 +30,7 @@
     slurp
     tldr
     tree
+    unzip
     wallust
     wl-clipboard
     yazi
@@ -40,6 +40,7 @@
     gcc
     gnumake
     lazygit
+    python3
     shellcheck
     tree-sitter
 

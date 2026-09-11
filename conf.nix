@@ -15,7 +15,7 @@
     ./modules/pkgs/fonts.nix
     ./modules/home/user.nix
     #./modules/services/apache.nix
-    ./modules/services/create_ap.nix
+    #./modules/services/create_ap.nix
   ];
 
   # latest kernel
@@ -32,8 +32,8 @@
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
+    keyMap = "br-abnt2";
     font = "Lat2-Terminus16";
-    useXkbConfig = true;
   };
 
   security.polkit.enable = true;

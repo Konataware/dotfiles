@@ -8,11 +8,13 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    acl
     ntfs3g
     git
     wget
     steamcmd
     heroic
+    p7zip
     wineWow64Packages.stable
 
     # wine compatibility things. I was having audio issues with Persona 4 Golden

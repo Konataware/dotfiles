@@ -15,6 +15,7 @@
       ./home/neovim.nix
       ./home/flameshot.nix
       ./home/sway.nix
+      ./home/wlsunset.nix
     ];
   };
 }

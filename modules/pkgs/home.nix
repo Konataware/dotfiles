@@ -19,6 +19,7 @@
     lxappearance
     pavucontrol
     rofi
+    qbittorrent
 
     # CLI / TUI system utilities
     bluetui

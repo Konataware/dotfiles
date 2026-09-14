@@ -16,6 +16,7 @@
     ./modules/home/user.nix
     #./modules/services/apache.nix
     #./modules/services/create_ap.nix
+    ./modules/services/jellyfin.nix
   ];
 
   # latest kernel

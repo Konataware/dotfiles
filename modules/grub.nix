@@ -1,6 +1,3 @@
-# ////////////////////////////////////
-# ///    Bootloader GRUB (UEFI)    ///
-# ////////////////////////////////////
 {
   boot = {
     initrd.services.lvm.enable = true;

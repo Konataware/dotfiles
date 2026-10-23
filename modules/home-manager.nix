@@ -1,12 +1,11 @@
 {
-  home-manager.users.paz = _: {
+  home-manager.users.anzu = _: {
     home.stateVersion = "26.05";
 
     home.sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
-
     # user pkgs and program configs
     imports = [
       ./pkgs/home.nix

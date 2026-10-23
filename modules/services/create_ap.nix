@@ -6,9 +6,9 @@
   services.create_ap = {
     enable = true;
     settings = {
-      INTERNET_IFACE = "wlps2s0";
+      INTERNET_IFACE = "wlp2s0";
       WIFI_IFACE = "wlp0s16u2";
-      SSID = "apname";
+      SSID = "satelite do netanyahu";
       PASSPHRASE = "sudo12345";
 
       # extra configs if needed

@@ -14,16 +14,17 @@
     ./modules/pkgs/system.nix
     ./modules/pkgs/fonts.nix
     ./modules/home/user.nix
-    #./modules/services/apache.nix
+    ./modules/services/apache.nix
     #./modules/services/create_ap.nix
     ./modules/services/jellyfin.nix
+    ./modules/services/mysql.nix
   ];
 
   # latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # bluetooth
-  hardware.bluetooth.enable = true;
+  # hardware.bluetooth.enable = true;
 
   # network
   networking.hostName = "nixos";
@@ -36,7 +37,17 @@
     keyMap = "br-abnt2";
     font = "Lat2-Terminus16";
   };
-
+  # configuration.nix
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+    zstd
+    openssl
+    curl
+    libxml2
+    glib
+  ];
   security.polkit.enable = true;
 
   # pipewire
@@ -45,7 +56,6 @@
     pulse.enable = true;
     alsa.enable = true;
   };
-
   # touchpad
   services.libinput.enable = true;
 

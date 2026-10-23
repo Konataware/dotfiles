@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   services.jellyfin = {
@@ -18,9 +23,9 @@
       RemainAfterExit = true;
     };
     script = ''
-      ${pkgs.acl}/bin/setfacl -m u:jellyfin:--x /home/paz
-      ${pkgs.acl}/bin/setfacl -R -m u:jellyfin:rX /home/paz/Media
-      ${pkgs.findutils}/bin/find /home/paz/Media -type d \
+      ${pkgs.acl}/bin/setfacl -m u:jellyfin:--x /home/anzu
+      ${pkgs.acl}/bin/setfacl -R -m u:jellyfin:rX /home/anzu/Media
+      ${pkgs.findutils}/bin/find /home/anzu/Media -type d \
         -exec ${pkgs.acl}/bin/setfacl -d -m u:jellyfin:rX {} \;
     '';
   };
@@ -28,10 +33,14 @@
   virtualisation.containers.storage.settings = {
     storage = {
       driver = "overlay";
-      graphroot = "/home/paz/.local/share/containers/storage";
-      runroot = "/run/containers/storage";
+      graphroot = "/home/anzu/.local/share/containers/storage";
     };
   };
+  systemd.tmpfiles.rules = [
+    "d /home/anzu/.containers-rootful 0711 root root -"
+    "d /home/anzu/.containers-rootful/storage 0711 root root -"
+    "d /home/anzu/.shoko 0755 anzu users -"
+  ];
 
   virtualisation.oci-containers = {
     backend = "podman";
@@ -39,15 +48,14 @@
       image = "ghcr.io/shokoanime/server:latest";
       ports = [ "8111:8111" ];
       volumes = [
-        "/home/paz/.shoko:/home/shoko/.shoko"
-        "/home/paz/Media:/mnt/anime:ro"
+        "/home/anzu/.shoko:/home/shoko/.shoko"
+        "/home/anzu/Media:/mnt/anime"
       ];
       environment = {
-        PUID = "1000";
-        PGID = "100";
+        PUID = toString config.users.users.anzu.uid;
+        PGID = toString config.users.groups.users.gid;
         TZ = "America/Sao_Paulo";
       };
-      extraOptions = [ "--restart=unless-stopped" ];
     };
   };
 

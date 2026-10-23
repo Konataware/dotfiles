@@ -1,33 +1,47 @@
-{ lib, pkgs, ... }:
-
 {
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "anytype"
-      "anytype-heart"
-    ];
+  pkgs,
+  ...
+}:
+let
+  unstable = import <unstable> {
+    config = pkgs.config;
+  };
+in
+{
 
+  nixpkgs.config.allowUnfreePackages = [
+    "postman"
+  ];
   home.packages = with pkgs; [
     # Desktop / GUI applications
     alacritty
-    #anytype
     arandr
     dunst
     flameshot
     libreoffice-still
     lxappearance
     pavucontrol
+    (unstable.postman.overrideAttrs (old: {
+      nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
+      postInstall = (old.postInstall or "") + ''
+        wrapProgram $out/bin/postman \
+          --set POSTMAN_DISABLE_GPU true
+      '';
+    }))
     rofi
     qbittorrent
+    telegram-desktop
 
     # CLI / TUI system utilities
+    asciiquarium
     bluetui
     fastfetch
     fd
     grim
     htop
+    jq
     keepassxc
+    unstable.pomo
     slurp
     tldr
     tree
@@ -36,7 +50,7 @@
     wl-clipboard
     yazi
 
-    # Development / programming tools
+    # Development / tools
     bash-language-server
     gcc
     gnumake

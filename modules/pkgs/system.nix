@@ -5,8 +5,12 @@
     "steam"
     "steam-unwrapped"
     "steamcmd"
+    "mongodb-ce"
   ];
-
+  services.mongodb = {
+    enable = true;
+    package = pkgs.mongodb-ce;
+  };
   environment.systemPackages = with pkgs; [
     acl
     ntfs3g

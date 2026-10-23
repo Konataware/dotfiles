@@ -1,4 +1,50 @@
+{ pkgs, ... }:
+
+let
+  lock-screen-bg = pkgs.writeShellApplication {
+    name = "lock-screen-bg";
+    runtimeInputs = with pkgs; [
+      alacritty
+      windowtolayer
+      asciiquarium
+    ];
+    text = ''
+      windowtolayer -- alacritty -e asciiquarium
+    '';
+  };
+
+  locker-command = "${pkgs.swaylock-plugin}/bin/swaylock-plugin --command-each ${lock-screen-bg}/bin/lock-screen-bg";
+in
 {
+  services.swayidle = {
+    enable = true;
+    timeouts = [
+      {
+        timeout = 300;
+        command = locker-command;
+      }
+      {
+        timeout = 600;
+        command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
+        resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+      }
+    ];
+    events = [
+      {
+        event = "before-sleep";
+        command = locker-command;
+      }
+      {
+        event = "lock";
+        command = locker-command;
+      }
+      {
+        event = "after-resume";
+        command = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+      }
+    ];
+  };
+
   wayland.windowManager.sway = {
     enable = true;
 
@@ -21,11 +67,6 @@
           command = "dunst";
           always = true;
         }
-        { command = "dex --autostart --environment i3"; }
-        {
-          command = "xss-lock --transfer-sleep-lock -- i3lock --nofork";
-          always = true;
-        }
         {
           command = "swaymsg workspace 1";
           always = true;
@@ -46,6 +87,9 @@
 
         # Screenshot
         "Mod4+Print" = "exec flameshot gui -p ~/Pictures/";
+
+        # Lock screen
+        "Mod4+Escape" = "exec ${locker-command}";
 
         # Kill focused window
         "Mod4+Shift+q" = "kill";
@@ -149,6 +193,11 @@
 
       for_window [class=".*"] border pixel 1
       floating_modifier Mod4
+
+      # emergency kill for the lock screen if it ever hangs
+      bindsym --locked Mod4+Shift+Escape exec pkill -f swaylock-plugin
+      include ~/.config/sway/outputs
+      include ~/.config/sway/workspaces
     '';
   };
 }

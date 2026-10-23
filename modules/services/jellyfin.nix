@@ -5,30 +5,56 @@
   ...
 }:
 
+let
+  homeDir = "/home/anzu";
+  mediaDir = "${homeDir}/Media";
+  aclStateDir = "/var/lib/jellyfin-acl";
+  aclStamp = "${aclStateDir}/initialized";
+in
 {
   services.jellyfin = {
     enable = true;
     openFirewall = true;
   };
 
-  systemd.services.jellyfin.wantedBy = lib.mkForce [ ];
+  systemd.services.jellyfin = {
+    wantedBy = lib.mkForce [ ];
+    requires = [ "jellyfin-acl.service" ];
+    after = [ "jellyfin-acl.service" ];
+  };
 
   systemd.services.jellyfin-acl = {
-    description = "jellyfin acl perms for ~/Media";
-    wantedBy = [ "jellyfin.service" ];
+    description = "Jellyfin ACL setup for ${mediaDir}";
+    wantedBy = lib.mkForce [ ];
     before = [ "jellyfin.service" ];
-    partOf = [ "jellyfin.service" ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
     };
     script = ''
-      ${pkgs.acl}/bin/setfacl -m u:jellyfin:--x /home/anzu
-      ${pkgs.acl}/bin/setfacl -R -m u:jellyfin:rX /home/anzu/Media
-      ${pkgs.findutils}/bin/find /home/anzu/Media -type d \
+      set -euo pipefail
+
+      ${pkgs.acl}/bin/setfacl -m u:jellyfin:--x ${homeDir}
+
+      if [ -e "${aclStamp}" ]; then
+        exit 0
+      fi
+
+      ${pkgs.acl}/bin/setfacl -R -m u:jellyfin:rX ${mediaDir}
+
+      ${pkgs.findutils}/bin/find ${mediaDir} -type d \
         -exec ${pkgs.acl}/bin/setfacl -d -m u:jellyfin:rX {} \;
+
+      touch "${aclStamp}"
     '';
   };
+
+  systemd.tmpfiles.rules = [
+    "d ${aclStateDir} 0755 root root -"
+    "d /home/anzu/.containers-rootful 0711 root root -"
+    "d /home/anzu/.containers-rootful/storage 0711 root root -"
+    "d /home/anzu/.shoko 0755 anzu users -"
+  ];
 
   virtualisation.containers.storage.settings = {
     storage = {
@@ -36,11 +62,6 @@
       graphroot = "/home/anzu/.local/share/containers/storage";
     };
   };
-  systemd.tmpfiles.rules = [
-    "d /home/anzu/.containers-rootful 0711 root root -"
-    "d /home/anzu/.containers-rootful/storage 0711 root root -"
-    "d /home/anzu/.shoko 0755 anzu users -"
-  ];
 
   virtualisation.oci-containers = {
     backend = "podman";
@@ -49,7 +70,7 @@
       ports = [ "8111:8111" ];
       volumes = [
         "/home/anzu/.shoko:/home/shoko/.shoko"
-        "/home/anzu/Media:/mnt/anime"
+        "${mediaDir}:/mnt/anime"
       ];
       environment = {
         PUID = toString config.users.users.anzu.uid;

@@ -15,11 +15,10 @@ in
   home.packages = with pkgs; [
     # Desktop / GUI applications
     alacritty
-    arandr
     dunst
     flameshot
     libreoffice-still
-    lxappearance
+    nwg-displays
     pavucontrol
     (unstable.postman.overrideAttrs (old: {
       nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
@@ -46,7 +45,6 @@ in
     tldr
     tree
     unzip
-    wallust
     wl-clipboard
     yazi
 
@@ -56,10 +54,15 @@ in
     gnumake
     lazygit
     python3
+    ripgrep
     shellcheck
     tree-sitter
 
     # Web browsers
     librewolf
+
+    # Sway
+    swayidle
+    swaylock
   ];
 }

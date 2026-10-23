@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 
@@ -14,10 +15,11 @@
     ./modules/pkgs/system.nix
     ./modules/pkgs/fonts.nix
     ./modules/home/user.nix
-    ./modules/services/apache.nix
+    #./modules/services/apache.nix
     #./modules/services/create_ap.nix
     ./modules/services/jellyfin.nix
-    ./modules/services/mysql.nix
+    #./modules/services/mysql.nix
+    ./modules/services/mongodb.nix
   ];
 
   # latest kernel
@@ -37,18 +39,11 @@
     keyMap = "br-abnt2";
     font = "Lat2-Terminus16";
   };
-  # configuration.nix
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc.lib
-    zlib
-    zstd
-    openssl
-    curl
-    libxml2
-    glib
-  ];
+  security.pam.services.swaylock-plugin = {
+    text = config.security.pam.services.swaylock.text;
+  };
   security.polkit.enable = true;
+  programs.nix-ld.enable = true;
 
   # pipewire
   services.pipewire = {

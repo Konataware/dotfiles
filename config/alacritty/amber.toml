@@ -1,0 +1,24 @@
+# Scheme 2: Dark Amber (subdued, lower brightness)
+[colors.primary]
+background = "#000000"
+foreground = "#CC8800"
+
+[colors.normal]
+black   = "#000000"
+red     = "#B84000"
+green   = "#8A7800"
+yellow  = "#B89800"
+blue    = "#805800"
+magenta = "#A04800"
+cyan    = "#B07000"
+white   = "#CCAA66"
+
+[colors.bright]
+black   = "#221100"
+red     = "#D05000"
+green   = "#A89000"
+yellow  = "#D0B000"
+blue    = "#A07000"
+magenta = "#C06000"
+cyan    = "#D08000"
+white   = "#EECC88"

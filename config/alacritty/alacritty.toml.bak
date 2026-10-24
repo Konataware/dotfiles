@@ -1,0 +1,20 @@
+[window]
+opacity = 0.8
+padding = { x = 10, y = 10 }
+decorations = "None"
+
+[general]
+import = ["~/.config/alacritty/colors.toml"]
+live_config_reload = true
+
+[selection]
+save_to_clipboard = true
+
+[font]
+size = 8
+
+[font.normal]
+family = "JetBrainsMono"
+style = "Regular"
+
+

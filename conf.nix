@@ -21,7 +21,6 @@
     #./modules/services/mysql.nix
     ./modules/services/mongodb.nix
   ];
-
   # latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -54,5 +53,9 @@
   # touchpad
   services.libinput.enable = true;
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system.stateVersion = "26.05";
 }

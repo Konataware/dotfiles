@@ -2,11 +2,6 @@
   pkgs,
   ...
 }:
-let
-  unstable = import <unstable> {
-    config = pkgs.config;
-  };
-in
 {
 
   nixpkgs.config.allowUnfreePackages = [
@@ -20,13 +15,13 @@ in
     libreoffice-still
     nwg-displays
     pavucontrol
-    (unstable.postman.overrideAttrs (old: {
-      nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
-      postInstall = (old.postInstall or "") + ''
-        wrapProgram $out/bin/postman \
-          --set POSTMAN_DISABLE_GPU true
-      '';
-    }))
+    #   (pkgs.unstable.postman.overrideAttrs (old: {
+    #   nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
+    #  postInstall = (old.postInstall or "") + ''
+    #   wrapProgram $out/bin/postman \
+    #    --set POSTMAN_DISABLE_GPU true
+    # '';
+    # }))
     rofi
     qbittorrent
     telegram-desktop
@@ -40,7 +35,7 @@ in
     htop
     jq
     keepassxc
-    unstable.pomo
+    pkgs.unstable.pomo
     slurp
     tldr
     tree

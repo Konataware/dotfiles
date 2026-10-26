@@ -23,7 +23,6 @@
     let
       system = "x86_64-linux";
 
-      # Makes `pkgs.unstable.<name>` available everywhere.
       unstableOverlay = final: prev: {
         unstable = import nixpkgs-unstable {
           inherit system;

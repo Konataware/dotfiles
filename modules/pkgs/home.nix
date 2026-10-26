@@ -15,13 +15,13 @@
     libreoffice-still
     nwg-displays
     pavucontrol
-    #   (pkgs.unstable.postman.overrideAttrs (old: {
-    #   nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
-    #  postInstall = (old.postInstall or "") + ''
-    #   wrapProgram $out/bin/postman \
-    #    --set POSTMAN_DISABLE_GPU true
-    # '';
-    # }))
+    (pkgs.unstable.postman.overrideAttrs (old: {
+      nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
+      postInstall = (old.postInstall or "") + ''
+         wrapProgram $out/bin/postman \
+        --set POSTMAN_DISABLE_GPU true
+      '';
+    }))
     rofi
     qbittorrent
     telegram-desktop

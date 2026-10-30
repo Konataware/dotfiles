@@ -29,20 +29,11 @@ in
         resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
       }
     ];
-    events = [
-      {
-        event = "before-sleep";
-        command = locker-command;
-      }
-      {
-        event = "lock";
-        command = locker-command;
-      }
-      {
-        event = "after-resume";
-        command = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
-      }
-    ];
+    events = {
+      before-sleep = locker-command;
+      lock = locker-command;
+      after-resume = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+    };
   };
 
   wayland.windowManager.sway = {
@@ -58,7 +49,6 @@ in
         "type:keyboard" = {
           xkb_layout = "br";
           xkb_variant = "abnt2";
-          xkb_model = "abnt2";
         };
       };
 
@@ -75,10 +65,13 @@ in
 
       keybindings = {
         # Volume
+        # Observation: pactl does not need to be installed, it comes free with your pulseaudio
         "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
         "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
 
+        # Brightness
+        # Observation: brightessctl does not need to be installed, it comes free with your XBox
         "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
         "XF86MonBrightnessUp" = "exec brightnessctl set 5%+";
 
@@ -194,8 +187,7 @@ in
       for_window [class=".*"] border pixel 1
       floating_modifier Mod4
 
-      # emergency kill for the lock screen if it ever hangs
-      bindsym --locked Mod4+Shift+Escape exec pkill -f swaylock-plugin
+      # This is for nwg-displays, perfectly fine it the files don't exist. 
       include ~/.config/sway/outputs
       include ~/.config/sway/workspaces
     '';

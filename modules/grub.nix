@@ -11,8 +11,8 @@
         # This is a custom efi file
         extraEntries = ''
           					menuentry "Microslop 10" {
-          							search --file --set=root /EFI/Microsoft/Boot/billgatesrapedkids.efi
-          							chainloader /EFI/Microsoft/Boot/billgatesrapedkids.efi
+          							search --file --set=root /EFI/Microsoft/Boot/boringefi.efi
+          							chainloader /EFI/Microsoft/Boot/boringefi.efi
           						}
           				'';
       };

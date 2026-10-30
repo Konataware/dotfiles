@@ -8,7 +8,7 @@
         enable = true;
         useOSProber = false;
         efiInstallAsRemovable = true;
-
+        # This is a custom efi file
         extraEntries = ''
           					menuentry "Microslop 10" {
           							search --file --set=root /EFI/Microsoft/Boot/billgatesrapedkids.efi

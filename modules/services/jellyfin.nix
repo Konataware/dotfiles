@@ -16,13 +16,13 @@ in
     enable = true;
     openFirewall = true;
   };
-
+  # I do not want a Jellyfin service starting at boot. On demand services.
   systemd.services.jellyfin = {
     wantedBy = lib.mkForce [ ];
     requires = [ "jellyfin-acl.service" ];
     after = [ "jellyfin-acl.service" ];
   };
-
+  # This fails if ~/Media isnt present. However, for simplicity sake it's an overcomplication to add a guard for a non-harmful error.
   systemd.services.jellyfin-acl = {
     description = "Jellyfin ACL setup for ${mediaDir}";
     wantedBy = lib.mkForce [ ];
@@ -67,7 +67,7 @@ in
     backend = "podman";
     containers.shoko = {
       image = "ghcr.io/shokoanime/server:latest";
-      ports = [ "8111:8111" ];
+      ports = [ "8111:8111" ]; # NixOS opens this port on the firewall by itself.
       volumes = [
         "/home/anzu/.shoko:/home/shoko/.shoko"
         "${mediaDir}:/mnt/anime"

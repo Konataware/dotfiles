@@ -4,9 +4,6 @@
 }:
 {
 
-  nixpkgs.config.allowUnfreePackages = [
-    "postman"
-  ];
   home.packages = with pkgs; [
     # Desktop / GUI applications
     alacritty

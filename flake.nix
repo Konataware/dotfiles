@@ -39,9 +39,10 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.overlays = [ unstableOverlay ];
-            home-manager.sharedModules = [
-              { nixpkgs.overlays = [ unstableOverlay ]; }
-            ];
+            home-manager.backupFileExtension = "backup";
+            home-manager.overwriteBackup = true;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
           }
         ];
       };

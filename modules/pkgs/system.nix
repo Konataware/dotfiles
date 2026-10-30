@@ -5,6 +5,7 @@
     "steam"
     "steam-unwrapped"
     "steamcmd"
+    "postman"
   ];
   environment.systemPackages = with pkgs; [
     acl

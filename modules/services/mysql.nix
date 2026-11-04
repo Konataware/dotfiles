@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   services.mysql = {
@@ -18,4 +18,8 @@
   environment.systemPackages = with pkgs; [
     mariadb
   ];
+
+  systemd.services.mysql = {
+    wantedBy = lib.mkForce [ ];
+  };
 }

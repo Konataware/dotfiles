@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   users.users.httpd = {
@@ -9,14 +14,17 @@
     shell = pkgs.bash;
   };
 
-  users.groups.httpd = {};
+  users.groups.httpd = { };
 
   services.httpd = {
     enable = true;
     adminAddr = "admin@example.org";
     user = "httpd";
     group = "httpd";
- 	 extraModules = [ "proxy" "proxy_fcgi" ];
+    extraModules = [
+      "proxy"
+      "proxy_fcgi"
+    ];
     virtualHosts."localhost" = {
       documentRoot = "/var/www/example.org";
       extraConfig = ''
@@ -56,7 +64,9 @@
   };
 
   networking.firewall.allowedTCPPorts = [ 80 ];
-
+  systemd.services.httpd = {
+    wantedBy = lib.mkForce [ ];
+  };
   system.activationScripts.createWwwDir = {
     text = ''
       mkdir -p /var/www/example.org
@@ -64,7 +74,7 @@
       chmod 755 /var/www/example.org
       chmod 755 /var/www
     '';
-    deps = [];
+    deps = [ ];
   };
 
   systemd.tmpfiles.rules = [

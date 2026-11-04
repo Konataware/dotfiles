@@ -15,6 +15,7 @@
       ./home/flameshot.nix
       ./home/sway.nix
       ./home/wlsunset.nix
+      #./home/spotifyplayer.nix
     ];
   };
 }

@@ -52,6 +52,7 @@
 
     # Web browsers
     librewolf
+    firefox
 
     # Sway
     swayidle

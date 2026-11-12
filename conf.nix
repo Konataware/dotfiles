@@ -20,6 +20,7 @@
     ./modules/services/jellyfin.nix
     #./modules/services/mysql.nix
     ./modules/services/mongodb.nix
+    ./modules/services/postgres.nix
   ];
   # latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
